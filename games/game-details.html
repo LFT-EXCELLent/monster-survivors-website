@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Details - Monster Survivors GamesOnline</title>
+    <meta name="description" content="Play and learn more about this exciting game on Monster Survivors GamesOnline.">
+    <link rel="canonical" href="https://monstersurvivorsgames.online/games/game-details.html">
+    <link rel="stylesheet" href="../css/styles.css">
+    
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:title" content="Game Details - Monster Survivors GamesOnline">
+    <meta property="og:description" content="Play this exciting game directly in your browser!">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://monstersurvivorsgames.online/games/game-details.html">
+    
+    <!-- Favicon -->
+    <link rel="icon" href="../images/favicon.ico" type="image/x-icon">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="header-content">
+                <div>
+                    <h1 class="site-title">Monster Survivors GamesOnline</h1>
+                    <p class="site-description">Play free games directly in your browser!</p>
+                </div>
+                <nav>
+                    <ul>
+                        <li><a href="../index.html">Home</a></li>
+                        <li><a href="../index.html#games-collection">Games</a></li>
+                        <li><a href="../index.html#about">About</a></li>
+                        <li><a href="../index.html#features">Features</a></li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+        <section>
+            <!-- 游戏详情内容 -->
+            <div class="game-detail-container">
+                <!-- 游戏iframe容器 -->
+                <div class="game-iframe-container">
+                    <iframe id="game-iframe" class="game-iframe" src="" allowfullscreen></iframe>
+                </div>
+                
+                <!-- 游戏信息 -->
+                <div class="game-info">
+                    <h2 id="game-title" class="game-info-title"></h2>
+                    <p id="game-description" class="game-info-description"></p>
+                    
+                    <div id="game-details" class="game-info-details">
+                        <!-- JavaScript 将动态填充游戏详情 -->
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <section>
+            <h2 class="section-title">Similar Games</h2>
+            <div id="similar-games" class="games-grid">
+                <!-- 这里可以根据游戏类别自动推荐相似游戏 -->
+                <!-- JavaScript将动态填充相似游戏 -->
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div>
+                    <h3>Monster Survivors GamesOnline</h3>
+                </div>
+                <div class="footer-links">
+                    <a href="../index.html">Home</a>
+                    <a href="../index.html#games-collection">Games</a>
+                    <a href="../index.html#about">About</a>
+                    <a href="../index.html#features">Features</a>
+                </div>
+            </div>
+            <p class="copyright">&copy; 2025 Monster Survivors GamesOnline. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <!-- 结构化数据 - 将由JavaScript动态填充 -->
+    <script type="application/ld+json" id="game-schema">
+    {
+        "@context": "https://schema.org",
+        "@type": "VideoGame",
+        "name": "",
+        "description": "",
+        "genre": "",
+        "playMode": "SinglePlayer",
+        "applicationCategory": "Game",
+        "url": ""
+    }
+    </script>
+
+    <!-- 引入游戏数据和主要脚本文件 -->
+    <script src="../js/games-data.js"></script>
+    <script src="../js/main.js"></script>
+    <script>
+        // 动态更新JSON-LD结构化数据
+        document.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+            const gameId = parseInt(params.get('id'));
+            
+            if (!isNaN(gameId)) {
+                const game = window.gamesData.find(g => g.id === gameId);
+                if (game) {
+                    // 更新结构化数据
+                    const schemaScript = document.getElementById('game-schema');
+                    const schemaData = {
+                        "@context": "https://schema.org",
+                        "@type": "VideoGame",
+                        "name": game.title,
+                        "description": game.description,
+                        "genre": game.details.genre,
+                        "playMode": game.details.players,
+                        "applicationCategory": "Game",
+                        "url": window.location.href
+                    };
+                    schemaScript.textContent = JSON.stringify(schemaData);
+                    
+                    // 更新Open Graph标签
+                    document.querySelector('meta[property="og:title"]').setAttribute("content", game.title + " - Monster Survivors GamesOnline");
+                    document.querySelector('meta[property="og:description"]').setAttribute("content", game.description);
+                    document.querySelector('meta[property="og:url"]').setAttribute("content", window.location.href);
+                    
+                    // 更新页面标题和描述
+                    document.title = game.title + " - Monster Survivors GamesOnline";
+                    document.querySelector('meta[name="description"]').setAttribute("content", game.description);
+                    document.querySelector('link[rel="canonical"]').setAttribute("href", window.location.href);
+                    
+                    // 自适应iframe尺寸
+                    const gameIframe = document.getElementById('game-iframe');
+                    const container = document.querySelector('.game-iframe-container');
+                    
+                    if (gameIframe && container) {
+                        // 先使用预设的宽高比（乘以100转为百分比）
+                        if (game.aspectRatio) {
+                            const percentRatio = game.aspectRatio * 100;
+                            container.style.paddingBottom = percentRatio + '%';
+                            console.log('使用预设宽高比: ' + percentRatio + '%');
+                        }
+                        
+                        // 监听iframe加载完成事件，尝试获取实际比例
+                        gameIframe.onload = function() {
+                            try {
+                                // 尝试获取游戏的实际尺寸
+                                const gameWindow = gameIframe.contentWindow;
+                                const gameDocument = gameWindow.document;
+                                
+                                // 尝试多种方法获取游戏尺寸
+                                let gameWidth = 0;
+                                let gameHeight = 0;
+                                
+                                // 方法1: 通过body尺寸
+                                if (gameDocument.body) {
+                                    gameWidth = gameDocument.body.scrollWidth || gameDocument.body.clientWidth;
+                                    gameHeight = gameDocument.body.scrollHeight || gameDocument.body.clientHeight;
+                                }
+                                
+                                // 方法2: 通过canvas元素（许多HTML5游戏使用canvas）
+                                if ((!gameWidth || !gameHeight) && gameDocument.querySelector('canvas')) {
+                                    const canvas = gameDocument.querySelector('canvas');
+                                    gameWidth = canvas.width;
+                                    gameHeight = canvas.height;
+                                }
+                                
+                                // 方法3: 如果有主游戏容器div
+                                if ((!gameWidth || !gameHeight) && gameDocument.getElementById('game-container')) {
+                                    const gameContainer = gameDocument.getElementById('game-container');
+                                    gameWidth = gameContainer.offsetWidth;
+                                    gameHeight = gameContainer.offsetHeight;
+                                }
+                                
+                                // 如果成功获取了尺寸，设置容器比例
+                                if (gameWidth && gameHeight && gameWidth > 0 && gameHeight > 0) {
+                                    const aspectRatio = (gameHeight / gameWidth) * 100;
+                                    container.style.paddingBottom = aspectRatio + '%';
+                                    console.log('游戏尺寸调整为: ' + gameWidth + 'x' + gameHeight + '，宽高比: ' + aspectRatio + '%');
+                                }
+                            } catch (e) {
+                                // 跨域安全限制可能会阻止访问iframe内容
+                                console.log('无法获取游戏尺寸，使用预设比例');
+                            }
+                        };
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html> 

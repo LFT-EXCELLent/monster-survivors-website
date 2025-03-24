@@ -1,0 +1,373 @@
+/* 
+ * Monster Survivors Games - Main Stylesheet
+ * 基于Apple设计风格的现代简洁游戏网站
+ */
+
+:root {
+  /* Apple设计风格颜色 */
+  --apple-blue: #007AFF;
+  --apple-red: #FF3B30;
+  --apple-green: #34C759;
+  --apple-purple: #AF52DE;
+  --apple-yellow: #FFCC00;
+  --apple-orange: #FF9500;
+  --apple-dark: #1C1C1E;
+  --apple-gray: #8E8E93;
+  --apple-lightgray: #F2F2F7;
+  --apple-white: #FFFFFF;
+  
+  /* 字体 */
+  --font-primary: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+}
+
+/* 基础样式 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: var(--font-primary);
+  background-color: var(--apple-lightgray);
+  color: var(--apple-dark);
+  line-height: 1.6;
+}
+
+a {
+  text-decoration: none;
+  color: inherit;
+  transition: color 0.3s ease;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+.container {
+  width: 100%;
+  max-width: 1300px;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+/* 头部导航 */
+header {
+  background-color: var(--apple-blue);
+  color: var(--apple-white);
+  padding: 1rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.site-title {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 0.5rem;
+}
+
+.site-description {
+  font-size: 1.1rem;
+}
+
+nav ul {
+  display: flex;
+  list-style: none;
+  gap: 1.5rem;
+  margin-top: 1rem;
+}
+
+nav a:hover {
+  color: var(--apple-yellow);
+}
+
+/* 主要内容区 */
+main {
+  padding: 2rem 0;
+}
+
+section {
+  margin-bottom: 3rem;
+}
+
+.section-title {
+  font-size: 1.8rem;
+  color: var(--apple-blue);
+  margin-bottom: 1.5rem;
+  font-weight: 700;
+}
+
+/* 游戏卡片样式 */
+.games-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.game-card {
+  background-color: var(--apple-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.game-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+}
+
+.game-card-image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+
+.game-card-content {
+  padding: 1.2rem;
+}
+
+.game-card-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--apple-dark);
+}
+
+.game-card-description {
+  font-size: 0.9rem;
+  color: var(--apple-gray);
+  margin-bottom: 1rem;
+}
+
+.game-card-button {
+  display: inline-block;
+  background-color: var(--apple-blue);
+  color: white;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.game-card-button:hover {
+  background-color: #0056b3;
+}
+
+/* 游戏详情页 */
+.game-detail-container {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+}
+
+.game-iframe-container {
+  position: relative;
+  width: 100%;
+  padding-bottom: 56.25%; /* 默认16:9比例，但会被覆盖 */
+  background-color: var(--apple-white);
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.game-iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+  object-fit: contain;
+}
+
+.game-info {
+  background-color: var(--apple-white);
+  border-radius: 12px;
+  padding: 1.5rem;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.game-info-title {
+  font-size: 2rem;
+  color: var(--apple-dark);
+  margin-bottom: 1rem;
+}
+
+.game-info-description {
+  margin-bottom: 1.5rem;
+  color: var(--apple-gray);
+  line-height: 1.7;
+}
+
+.game-info-details {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 1rem;
+}
+
+.game-info-item {
+  background-color: var(--apple-lightgray);
+  border-radius: 8px;
+  padding: 1rem;
+}
+
+.game-info-item-title {
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+  color: var(--apple-blue);
+}
+
+/* 搜索和筛选 */
+.search-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.search-input {
+  flex: 1;
+  min-width: 200px;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--apple-gray);
+  border-radius: 8px;
+  font-size: 1rem;
+  font-family: var(--font-primary);
+}
+
+.search-button {
+  background-color: var(--apple-blue);
+  color: white;
+  border: none;
+  border-radius: 8px;
+  padding: 0 1.5rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
+}
+
+.search-button:hover {
+  background-color: #0056b3;
+}
+
+.filter-container {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+}
+
+.filter-button {
+  background-color: var(--apple-white);
+  border: 1px solid var(--apple-gray);
+  border-radius: 20px;
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.filter-button:hover, .filter-button.active {
+  background-color: var(--apple-blue);
+  color: white;
+  border-color: var(--apple-blue);
+}
+
+/* 分页控件 */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  margin-top: 2rem;
+}
+
+.pagination-button {
+  width: 40px;
+  height: 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--apple-white);
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.pagination-button:hover, .pagination-button.active {
+  background-color: var(--apple-blue);
+  color: white;
+}
+
+/* 页脚 */
+footer {
+  background-color: var(--apple-dark);
+  color: white;
+  padding: 2rem 0;
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.footer-links {
+  display: flex;
+  gap: 1.5rem;
+  margin: 1rem 0;
+}
+
+.footer-links a:hover {
+  color: var(--apple-blue);
+}
+
+.copyright {
+  margin-top: 1rem;
+  text-align: center;
+  color: var(--apple-gray);
+}
+
+/* 响应式设计 */
+@media (min-width: 768px) {
+  .header-content {
+    flex-direction: row;
+  }
+  
+  nav ul {
+    margin-top: 0;
+  }
+  
+  .game-detail-container {
+    grid-template-columns: 2fr 1fr;
+  }
+  
+  .footer-content {
+    flex-direction: row;
+    justify-content: space-between;
+  }
+}
+
+@media (max-width: 767px) {
+  .site-title {
+    font-size: 1.5rem;
+  }
+  
+  .game-iframe-container {
+    height: 400px;
+  }
+  
+  .search-container {
+    flex-direction: column;
+  }
+  
+  .filter-container {
+    justify-content: center;
+  }
+} 
